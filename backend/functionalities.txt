@@ -1,0 +1,103 @@
+1. load coordinates on google map
+
+2. find atonomous system number :
+    ASN provided by the ipinfo.com 
+
+3. find location of the ip address:
+    geographical location of the ip address 
+
+4. Reverse dns lookup:
+    find domain name of an ip
+
+5. DNS lookup:
+    find the ip of a domain
+
+6. Scan Top protocol ports 
+    ports_to_check = [21, 25, 53, 80, 443, 3306, 3389, 8080]
+    these ports are scanned 
+    Port	Service	Description
+    21	FTP	File Transfer Protocol
+    22	SSH	Secure Shell
+    23	Telnet	Unencrypted remote login
+    25	SMTP	Simple Mail Transfer Protocol (Email sending)
+    53	DNS	Domain Name System (Name resolution)
+    80	HTTP	HyperText Transfer Protocol (Web traffic)
+    110	POP3	Post Office Protocol v3 (Incoming email)
+    143	IMAP	Internet Message Access Protocol (Email retrieval)
+    161	SNMP	Simple Network Management Protocol
+    389	LDAP	Lightweight Directory Access Protocol
+    443	HTTPS	Secure HTTP (SSL/TLS Web Traffic)
+    445	SMB	Server Message Block (Windows file sharing)
+    587	SMTP (Submission)	Email submission over SSL/TLS
+    993	IMAP over SSL	Secure IMAP
+    995	POP3 over SSL	Secure POP3
+    3306	MySQL	MySQL Database
+    3389	RDP	Remote Desktop Protocol
+    1521	Oracle Database	Oracle DB service
+    1433	MSSQL	Microsoft SQL Server
+    27017	MongoDB	MongoDB database
+    6379	Redis	Redis key-value store
+    5432	PostgreSQL	PostgreSQL database
+    500	IKE	Internet Key Exchange (VPNs)
+    1194	OpenVPN	OpenVPN service
+    5900	VNC	Virtual Network Computing (Remote Desktop)
+    8080	HTTP Proxy/Alt HTTP	Common alternate HTTP port
+    8443	HTTPS (Alt)	Alternative HTTPS port
+    3128	Squid Proxy	Proxy server default port
+    1080	SOCKS Proxy	Used for SOCKS proxy servers
+    1883	MQTT	Message Queuing Telemetry Transport (IoT)
+    1900	SSDP	Simple Service Discovery Protocol
+    5353	mDNS	Multicast DNS (Bonjour, ZeroConf)
+    6667	IRC	Internet Relay Chat
+
+7. Scan open ports of an ip
+
+8. Scan a perticular port of an ip
+
+9. Scan a port's service, protocol and their version of an ip 
+
+10. Scan for any open vulnerability
+
+11. scan vulnerable ftp 
+
+12. scan vulnerable ssh
+
+13. scan vulnerable telnet
+
+14. scan vulnerable smtp
+
+15. scan vulnerable dns
+
+16. scan vulnerable http
+
+17. scan vulnerable pop3
+
+18. scan vulnerable imap
+
+19. scan vulnerable snpm 
+
+20. scan vulnerable ldap
+
+21. scan vulnerable https
+
+22. scan vulnerable smb
+
+23. scan vulnerable smtp ssl 
+
+24. scan vulnerable imap ssl
+
+25. scan vulnerable pop3 ssl
+
+26. scan vulnerable mysql
+
+27. scan vulnerable rdp
+
+28. scan vulnerable oracledb
+
+29. scan vulnerable mssql 
+
+30. scan vulnerable mongodb
+
+31. scan vulnerable redis
+
+32. scan vulnerable postgresql
