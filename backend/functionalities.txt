@@ -101,3 +101,6 @@
 31. scan vulnerable redis
 
 32. scan vulnerable postgresql
+
+google = 142.250.193.142
+instagram = 157.240.192.174
