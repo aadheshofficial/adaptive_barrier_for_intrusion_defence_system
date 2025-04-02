@@ -12,13 +12,18 @@ def scan_vulnerable_ssh(ip: str, port: int) -> dict:
         dict: A dictionary containing detected SSH vulnerabilities.
     """
     nm = nmap.PortScanner()
-    nm.scan(hosts=ip, ports=str(port), arguments="--script ssh-vuln*,ssh-auth-methods,ssh-brute,ssh2-enum-algos,ssh-hostkey,ssh-run,ssh-banner,ssh-publickey-acceptance,ssh-known-hosts,ssh-version,ssh-config,ssh-debug-info,ssh-hmac-algos,ssh-auth-owners,ssh-audit,ssh-trace,sshv1-support,ssl*,tls-ticketbleed,tls-heartbleed,ssl-dh-params,ssl-cert-intact,ssl-poodle,ssl-ccs-injection,ssl-enum-ciphers,ssl-date --script-args unsafe=1")
+    nm.scan(hosts=ip, ports=str(port), 
+            arguments="--script ssh-auth-methods,ssh2-enum-algos,ssh-hostkey,ssh-run,ssh-brute,ssh-publickey-acceptance"
+            # arguments="-Pn --script ssh-auth-methods,ssh2-enum-algos,ssh-hostkey,ssh-run,ssh-banner,ssh-publickey-acceptance,ssh-known-hosts,ssh-version,ssh-config,ssh-debug-info"
+            )
 
     results = {}
-
+    port=int(port)
+    print(nm.get_nmap_last_output())
     if ip in nm.all_hosts():
         for proto in nm[ip].all_protocols():
             if port in nm[ip][proto]:
+                print("hello")
                 script_results = nm[ip][proto][port].get("script", {})
                 if script_results:
                     results[port] = script_results  

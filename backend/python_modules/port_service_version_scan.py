@@ -16,7 +16,7 @@ def find_service_version(ip: str, port: int) -> dict | None:
 
     try:
         nm.scan(hosts=ip, ports=str(port), arguments="-sV")
-
+        port = int(port)
         if ip in nm.all_hosts():
             for proto in nm[ip].all_protocols():
                 if port in nm[ip][proto]:

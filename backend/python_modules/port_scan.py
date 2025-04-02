@@ -13,14 +13,15 @@ def check_port_status(ip: str, port: int) -> bool:
     """
     nm = nmap.PortScanner()
     nm.scan(ip, str(port))
-
+    port=int(port)
     if ip in nm.all_hosts():
         for proto in nm[ip].all_protocols():
             if port in nm[ip][proto]:
                 state = nm[ip][proto][port].get('state', 'closed/filtered')
-                return state == 'open'
+                if state == 'open':
+                    return "Open"
 
-    return False
+    return "closed"
 
 def help():
     """

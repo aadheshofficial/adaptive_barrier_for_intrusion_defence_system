@@ -118,6 +118,38 @@ def print_items(item_list,title):
 
     print()
 
+def format_nmap_results(scan_results: dict) -> str:
+    formatted_output = """### Nmap Scan Results\n"""
+    
+    for port, data in scan_results.items():
+        formatted_output += f"\n#### Port: {port}\n"
+        
+        for script, output in data.items():
+            formatted_output += f"- **{script.replace('-', ' ').title()}**\n"
+            
+            if 'VULNERABLE' in output:
+                formatted_output += "  - **State:** VULNERABLE (Exploitable)\n"
+                
+                if 'CVE' in output:
+                    cve_index = output.find('CVE:')
+                    cve = output[cve_index:].split('\n')[0] if cve_index != -1 else "Unknown"
+                    formatted_output += f"  - **{cve}**\n"
+                
+                if 'Exploit results:' in output:
+                    exploit_start = output.find('Exploit results:')
+                    exploit_data = output[exploit_start:].splitlines() if exploit_start != -1 else []
+                    for line in exploit_data:
+                        formatted_output += f"    - {line.strip()}\n"
+                
+                formatted_output += "\n  - **References:**\n"
+                for ref in output.splitlines():
+                    if 'http' in ref:
+                        formatted_output += f"    - {ref.strip()}\n"
+                
+            else:
+                formatted_output += "  - " + "\n  - ".join(output.strip().splitlines()) + "\n"
+    
+    return formatted_output
 
 def loading_animation(stop_event):
     spinner = itertools.cycle(["-", "\\", "|", "/"])
@@ -292,7 +324,7 @@ def s_open_prot():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -458,7 +490,8 @@ def s_ftp():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
+        # print(format_nmap_results(result))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -488,7 +521,7 @@ def s_ssh():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -519,7 +552,7 @@ def s_telnet():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -550,7 +583,7 @@ def s_smtp():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -581,7 +614,7 @@ def s_dns():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -612,7 +645,7 @@ def s_http():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -643,7 +676,7 @@ def s_pop3():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -674,7 +707,7 @@ def s_imap():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -705,7 +738,7 @@ def s_snmp():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -736,7 +769,7 @@ def s_https():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -767,7 +800,7 @@ def s_smb():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -798,7 +831,7 @@ def s_smtp_s():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -829,7 +862,7 @@ def s_imap_s():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -860,7 +893,7 @@ def s_pop3_s():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -891,7 +924,7 @@ def s_mysql():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -922,7 +955,7 @@ def s_rdp():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -953,7 +986,7 @@ def s_oracle():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -984,7 +1017,7 @@ def s_mssql():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -1015,7 +1048,7 @@ def s_mongodb():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
@@ -1046,7 +1079,7 @@ def s_redis():
     loader_thread.join()
 
     if result:
-        print(colored(f"\n{result}", "green"))
+        print(colored(f"\n{format_nmap_results(result)}", "green"))
     else:
         print(colored(f"\nNo result found for {host}", "red"))
 
